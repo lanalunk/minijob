@@ -1,159 +1,57 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Layanan Mini Job</title>  <style>
-    :root {
-      --bg: #f5f5f5;
-      --text: #222;
-      --card: #fff;
-      --gradient: linear-gradient(135deg, #4b6cff, #8a2be2);
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Layanan Mini Job - Index</title>
+<style>
+body{font-family:Arial, sans-serif;margin:0;background:#f5f7ff;color:#111}
+header{background:linear-gradient(135deg,#4b6cff,#8a2be2);padding:40px;text-align:center;color:white}
+.container{max-width:1100px;margin:20px auto;padding:0 16px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card{background:white;border-radius:12px;padding:16px;box-shadow:0 8px 30px rgba(20,30,70,0.06)}
+.card h3{margin:6px 0;color:#2b4cff}
+.card p{margin:6px 0;color:#555}
+.card .price{font-weight:700;color:#4b6cff;margin-top:8px}
+.card a{display:inline-block;margin-top:10px;padding:8px 12px;background:linear-gradient(90deg,#4b6cff,#8a2be2);color:white;border-radius:8px;text-decoration:none}
+.footer{padding:24px;text-align:center;color:#777}
+</style>
+</head>
+<body>
+<header><h1>Layanan Mini Job</h1><p>klik "Pesan" untuk membuka halaman pemesanan masing-masing layanan</p></header>
+<div class="container">
+<div class="card"><h3>Desain Grafis</h3><p>Desain Grafis — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/desain-grafis.html">Pesan</a></div>
+<div class="card"><h3>Edit Foto & Video</h3><p>Edit Foto & Video — layanan profesional.</p><div class="price">Mulai Rp 20.000</div><a href="orders/edit-foto-video.html">Pesan</a></div>
+<div class="card"><h3>Dokumen & Ketik</h3><p>Dokumen & Ketik — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/dokumen-ketik.html">Pesan</a></div>
+<div class="card"><h3>Copywriting / Caption</h3><p>Copywriting / Caption — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/copywriting-caption.html">Pesan</a></div>
+<div class="card"><h3>Edit CV / Resume</h3><p>Edit CV / Resume — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/edit-cv-resume.html">Pesan</a></div>
+<div class="card"><h3>Pembuatan PPT</h3><p>Pembuatan PPT — layanan profesional.</p><div class="price">Mulai Rp 20.000</div><a href="orders/pembuatan-ppt.html">Pesan</a></div>
+<div class="card"><h3>Input Data</h3><p>Input Data — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/input-data.html">Pesan</a></div>
+<div class="card"><h3>Remove Background</h3><p>Remove Background — layanan profesional.</p><div class="price">Mulai Rp 3.000</div><a href="orders/remove-background.html">Pesan</a></div>
+<div class="card"><h3>Bersih-Bersih Ringan</h3><p>Bersih-Bersih Ringan — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/bersih-ringan.html">Pesan</a></div>
+<div class="card"><h3>Cuci Peralatan Ringan</h3><p>Cuci Peralatan Ringan — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/cuci-peralatan.html">Pesan</a></div>
+<div class="card"><h3>Bantu Belanja</h3><p>Bantu Belanja — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/bantu-belanja.html">Pesan</a></div>
+<div class="card"><h3>Cuci Kamar Mandi Ringan</h3><p>Cuci Kamar Mandi Ringan — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/cuci-kamar-mandi.html">Pesan</a></div>
+<div class="card"><h3>Poles Perabot</h3><p>Poles Perabot — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/poles-perabot.html">Pesan</a></div>
+<div class="card"><h3>Lipat Baju</h3><p>Lipat Baju — layanan profesional.</p><div class="price">Mulai Rp 7.000</div><a href="orders/lipat-baju.html">Pesan</a></div>
+<div class="card"><h3>Buang Sampah</h3><p>Buang Sampah — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/buang-sampah.html">Pesan</a></div>
+<div class="card"><h3>Packing Barang</h3><p>Packing Barang — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/packing-barang.html">Pesan</a></div>
+<div class="card"><h3>Foto Produk Basic</h3><p>Foto Produk Basic — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/foto-produk-basic.html">Pesan</a></div>
+<div class="card"><h3>Titip Pesan Makanan</h3><p>Titip Pesan Makanan — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/titip-pesan-makanan.html">Pesan</a></div>
+<div class="card"><h3>Pasang Lampu / Bohlam</h3><p>Pasang Lampu / Bohlam — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/pasang-lampu.html">Pesan</a></div>
+<div class="card"><h3>Helper Angkat Barang</h3><p>Helper Angkat Barang — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/helper-angkat-barang.html">Pesan</a></div>
+<div class="card"><h3>Antar Dokumen</h3><p>Antar Dokumen — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/antar-dokumen.html">Pesan</a></div>
+<div class="card"><h3>Servis Motor (Roda 2)</h3><p>Servis Motor (Roda 2) — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/servis-motor.html">Pesan</a></div>
+<div class="card"><h3>Servis Roda 3</h3><p>Servis Roda 3 — layanan profesional.</p><div class="price">Mulai Rp 20.000</div><a href="orders/servis-roda3.html">Pesan</a></div>
+<div class="card"><h3>Pompa Ban</h3><p>Pompa Ban — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/pompa-ban.html">Pesan</a></div>
+<div class="card"><h3>Cek Aki Motor</h3><p>Cek Aki Motor — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/cek-aki.html">Pesan</a></div>
+<div class="card"><h3>Servis Elektronik Rumah</h3><p>Servis Elektronik Rumah — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/servis-elektronik-rumah.html">Pesan</a></div>
+<div class="card"><h3>Servis Setrika</h3><p>Servis Setrika — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/servis-setrika.html">Pesan</a></div>
+<div class="card"><h3>Servis Speaker</h3><p>Servis Speaker — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/servis-speaker.html">Pesan</a></div>
+<div class="card"><h3>Servis Mini Fan</h3><p>Servis Mini Fan — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/servis-mini-fan.html">Pesan</a></div>
+<div class="card"><h3>Servis Handphone</h3><p>Servis Handphone — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/servis-handphone.html">Pesan</a></div>
 
-    body.dark {
-      --bg: #1a1a1a;
-      --text: #eaeaea;
-      --card: #222;
-      --gradient: linear-gradient(135deg, #2f4cff, #5c1ada);
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      transition: 0.3s ease;
-    }
-
-    header {
-      background: var(--gradient);
-      padding: 70px 20px 90px;
-      text-align: center;
-      color: white;
-      border-bottom-left-radius: 50px;
-      border-bottom-right-radius: 50px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 50%;
-      top: -60px;
-      right: -50px;
-      filter: blur(4px);
-    }
-
-    #darkToggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      z-index: 999;
-    }
-
-    .section-title {
-      margin: 40px 20px 10px;
-      font-size: 1.7rem;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      transition: 0.3s ease;
-    }
-
-    .card-icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
-
-    .price {
-      margin-top: 12px;
-      font-weight: bold;
-      color: #4b6cff;
-    }
-
-    .wa-button {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      background: #25d366;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 30px;
-      text-decoration: none;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-      transition: 0.3s;
-      z-index: 999;
-    }
-  </style></head>
-<body><button id="darkToggle">🌙</button>
-
-<header>
-  <h1>Layanan Mini Job</h1>
-  <p>Solusi cepat untuk berbagai pekerjaan kecil, digital maupun offline.</p>
-</header><!-- DIGITAL --><div class="section-title">Kategori: Jasa Digital Skill (Online)</div>
-<div class="card-container">  <div class="card"><div class="card-icon">🎨</div><h3>Desain Grafis</h3><p>Logo, poster, feed IG, banner.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">✏️</div><h3>Edit Foto & Video</h3><p>Editing cepat untuk sosial media.</p><div class="price">Mulai Rp 20.000</div></div>
-  <div class="card"><div class="card-icon">📄</div><h3>Dokumen & Ketik</h3><p>Pengetikan, layout PDF, revisi file.</p><div class="price">Mulai Rp 5.000</div></div>
-  <div class="card"><div class="card-icon">📝</div><h3>Copywriting / Caption</h3><p>Tulisan promosi, deskripsi produk.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">🧾</div><h3>Edit CV / Resume</h3><p>Perbaikan tampilan dan isi CV.</p><div class="price">Mulai Rp 15.000</div></div>
-  <div class="card"><div class="card-icon">📊</div><h3>Pembuatan PPT</h3><p>Slide presentasi profesional.</p><div class="price">Mulai Rp 20.000</div></div>
-  <div class="card"><div class="card-icon">🧮</div><h3>Input Data</h3><p>Entry data cepat & akurat.</p><div class="price">Mulai Rp 5.000</div></div>
-  <div class="card"><div class="card-icon">🖼️</div><h3>Remove Background</h3><p>Hapus latar foto bersih rapi.</p><div class="price">Mulai Rp 3.000</div></div></div><!-- RUMAH TANGGA --><div class="section-title">Kategori: Pekerjaan Rumah Tangga (Offline)</div>
-<div class="card-container">  <div class="card"><div class="card-icon">🧹</div><h3>Bersih-Bersih Ringan</h3><p>Cepat dan fokus area tertentu.</p><div class="price">Mulai Rp 15.000</div></div>
-  <div class="card"><div class="card-icon">🍽️</div><h3>Cuci Peralatan Ringan</h3><p>Peralatan dapur dan barang kecil.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">🛒</div><h3>Bantu Belanja</h3><p>Belanja sesuai daftar.</p><div class="price">Mulai Rp 5.000</div></div>
-  <div class="card"><div class="card-icon">🧽</div><h3>Cuci Kamar Mandi Ringan</h3><p>Pembersihan cepat area mandi.</p><div class="price">Mulai Rp 15.000</div></div>
-  <div class="card"><div class="card-icon">🧴</div><h3>Poles Perabot</h3><p>Bersihkan kaca & perabot kecil.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">👕</div><h3>Lipat Baju</h3><p>Lipat rapi berbagai jenis pakaian.</p><div class="price">Mulai Rp 7.000</div></div>
-  <div class="card"><div class="card-icon">🗑️</div><h3>Buang Sampah</h3><p>Pengambilan & pembuangan sampah.</p><div class="price">Mulai Rp 5.000</div></div></div><!-- PEKERJAAN BEBAS --><div class="section-title">Kategori: Pekerjaan Bebas</div>
-<div class="card-container">  <div class="card"><div class="card-icon">📦</div><h3>Packing Barang</h3><p>Pengemasan rapi & aman.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">🤳</div><h3>Foto Produk Basic</h3><p>Foto HP untuk katalog / jualan.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">🛍️</div><h3>Titip Pesan Makanan</h3><p>Pembelian tanpa aplikasi.</p><div class="price">Mulai Rp 5.000</div></div>
-  <div class="card"><div class="card-icon">🪜</div><h3>Pasang Lampu / Bohlam</h3><p>Instalasi lampu kecil & perbaikan.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">🛠️</div><h3>Helper Angkat Barang</h3><p>Bantu angkat & pindah barang.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">📄</div><h3>Antar Dokumen</h3><p>Pengantaran cepat jarak dekat.</p><div class="price">Mulai Rp 10.000</div></div></div><!-- SERVIS KENDARAAN --><div class="section-title">Kategori: Servis Kendaraan</div>
-<div class="card-container">  <div class="card"><div class="card-icon">🔧</div><h3>Servis Motor (Roda 2)</h3><p>Oli, rem, rantai, ban.</p><div class="price">Mulai Rp 15.000</div></div>
-  <div class="card"><div class="card-icon">🔧</div><h3>Servis Roda 3</h3><p>Perawatan kendaraan roda tiga.</p><div class="price">Mulai Rp 20.000</div></div>
-  <div class="card"><div class="card-icon">🛞</div><h3>Pompa Ban</h3><p>Untuk roda 2 dan roda 3.</p><div class="price">Mulai Rp 5.000</div></div>
-  <div class="card"><div class="card-icon">🔋</div><h3>Cek Aki Motor</h3><p>Pengecekan & pembersihan ringan.</p><div class="price">Mulai Rp 10.000</div></div></div><!-- SERVIS ELEKTRONIK --><div class="section-title">Kategori: Servis Elektronik</div>
-<div class="card-container">  <div class="card"><div class="card-icon">🔌</div><h3>Servis Elektronik Rumah</h3><p>Kipas, speaker, blender, setrika.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">🔥</div><h3>Servis Setrika</h3><p>Perbaikan panas & kabel.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">🔊</div><h3>Servis Speaker</h3><p>Speaker kecil & bluetooth.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">🌀</div><h3>Servis Mini Fan</h3><p>Kipas USB & meja.</p><div class="price">Mulai Rp 10.000</div></div>
-  <div class="card"><div class="card-icon">📱</div><h3>Servis Handphone</h3><p> instal aplikasi, cek speaker, optimasi HP.</p><div class="price">Mulai Rp 15.000</div></div></div><a class="wa-button" href="https://wa.me/6285727754442" target="_blank">💬</a>
-
-<script>
-  document.getElementById("darkToggle").onclick = () => {
-    document.body.classList.toggle("dark");
-  };
-</script></body>
+</div>
+<div class="footer">© 2025 Layanan Mini Job</div>
+</body>
 </html>
