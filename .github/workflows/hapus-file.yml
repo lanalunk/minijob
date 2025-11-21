@@ -1,0 +1,23 @@
+name: Hapus File Selain Index
+
+on:
+  workflow_dispatch:
+
+jobs:
+  delete-files:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Hapus semua file kecuali index.html
+        run: |
+          find . -maxdepth 1 -type f ! -name "index.html" -delete
+
+      - name: Commit perubahan
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add .
+          git commit -m "Hapus semua file kecuali index.html" || echo "Tidak ada file yang dihapus"
+          git push
