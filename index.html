@@ -3,181 +3,273 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Toko Jasa Online Modern</title>
+  <title>Layanan Mini Job</title>
 
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #333;
+    :root {
+      --bg: #f5f5f5;
+      --text: #222;
+      --card: #fff;
+      --gradient: linear-gradient(135deg, #4b6cff, #8a2be2);
     }
 
+    /* DARK MODE */
+    body.dark {
+      --bg: #1a1a1a;
+      --text: #eaeaea;
+      --card: #222;
+      --gradient: linear-gradient(135deg, #2f4cff, #5c1ada);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s ease;
+    }
+
+    /* HEADER */
     header {
-      background: linear-gradient(135deg, #1e88e5, #0d47a1);
-      color: white;
-      padding: 40px 20px;
+      background: var(--gradient);
+      padding: 70px 20px 90px;
       text-align: center;
+      color: white;
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* HERO IMAGE (ABSTRACT SHAPE) */
+    header::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      top: -60px;
+      right: -50px;
+      filter: blur(4px);
     }
 
     header h1 {
-      font-size: 2.4rem;
-      margin-bottom: 5px;
+      margin: 0;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
-    nav {
-      background: #0d47a1;
-      padding: 12px;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    header p {
+      font-size: 1.15rem;
+      opacity: 0.9;
+      margin-top: 10px;
     }
 
-    nav a {
-      color: white;
-      margin: 0 18px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      opacity: 0.7;
-    }
-
-    .hero {
-      padding: 80px 20px;
+    /* DARK MODE BUTTON */
+    #darkToggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
       background: white;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+    body.dark #darkToggle {
+      background: #333;
+      color: white;
     }
 
-    .hero h2 {
-      font-size: 2rem;
+    /* SECTION TITLE */
+    .section-title {
+      margin: 40px 20px 10px;
+      font-size: 1.7rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* CARD GRID */
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+    }
+
+    .card-icon {
+      font-size: 40px;
       margin-bottom: 10px;
     }
 
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      padding: 40px 20px;
+    .card h3 {
+      margin-top: 0;
+      color: #4b6cff;
+      font-size: 1.3rem;
     }
 
-    .service-card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: 0.3s;
+    body.dark .card h3 {
+      color: #9dacff;
     }
 
-    .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    .card p {
+      opacity: 0.9;
+      line-height: 1.6;
     }
 
-    .contact {
-      padding: 40px 20px;
-      text-align: center;
-      background: #e3f2fd;
+    /* PRICELIST */
+    .price {
+      margin-top: 12px;
+      font-weight: bold;
+      color: #4b6cff;
+    }
+    body.dark .price {
+      color: #b2bfff;
     }
 
-    footer {
-      background: #0d47a1;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 20px;
-    }
-
-    .wa-btn {
+    /* WHATSAPP BUTTON */
+    .wa-button {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
+      bottom: 22px;
+      right: 22px;
+      background: #25d366;
       color: white;
       width: 60px;
       height: 60px;
       border-radius: 50%;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       font-size: 30px;
       text-decoration: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
       transition: 0.3s;
-      z-index: 200;
+      z-index: 999;
     }
 
-    .wa-btn:hover {
+    .wa-button:hover {
       transform: scale(1.1);
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.8rem;
-      }
-      .hero h2 {
-        font-size: 1.5rem;
-      }
+      background: #1ebe5d;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h1>Toko Jasa Online</h1>
-    <p>Layanan cepat, modern, dan terpercaya</p>
-  </header>
+<button id="darkToggle">🌙</button>
 
-  <nav>
-    <a href="#beranda">Beranda</a>
-    <a href="#jasa">Jasa</a>
-    <a href="#kontak">Kontak</a>
-  </nav>
+<header>
+  <h1>Layanan Mini Job</h1>
+  <p>Solusi cepat untuk berbagai pekerjaan kecil, digital maupun offline.</p>
+</header>
 
-  <section class="hero" id="beranda">
-    <h2>Solusi Jasa Terbaik untuk Kebutuhanmu!</h2>
-    <p>Pilih layanan sesuai kebutuhanmu dengan tampilan modern & profesional.</p>
-  </section>
+<!-- DIGITAL SKILL -->
+<div class="section-title">Kategori: Jasa Digital Skill (Online)</div>
+<div class="card-container">
 
-  <section class="services" id="jasa">
-    <div class="service-card">
-      <h3>Desain Grafis</h3>
-      <p>Logo, poster, banner, dan kebutuhan desain lainnya.</p>
-      <strong>Rp 50.000 – 150.000</strong>
-    </div>
+  <div class="card">
+    <div class="card-icon">🎨</div>
+    <h3>Desain Grafis</h3>
+    <p>Logo, poster, feed IG, banner, dan kebutuhan visual lain.</p>
+    <div class="price">Mulai Rp 10.000</div>
+  </div>
 
-    <div class="service-card">
-      <h3>Editing Video</h3>
-      <p>Video pendek, reels, promosi, dan lainnya.</p>
-      <strong>Rp 75.000 – 200.000</strong>
-    </div>
+  <div class="card">
+    <div class="card-icon">✏️</div>
+    <h3>Edit Foto & Video</h3>
+    <p>Editing cepat untuk kebutuhan sosial media atau promosi.</p>
+    <div class="price">Mulai Rp 20.000</div>
+  </div>
 
-    <div class="service-card">
-      <h3>Jasa Pengetikan</h3>
-      <p>Dokumen, tugas, laporan, dan lainnya.</p>
-      <strong>Rp 5.000 / halaman</strong>
-    </div>
-  </section>
+  <div class="card">
+    <div class="card-icon">📄</div>
+    <h3>Dokumen & Ketik</h3>
+    <p>Pembuatan file, revisi, pengetikan cepat, dan layout PDF.</p>
+    <div class="price">Mulai Rp 5.000</div>
+  </div>
 
-  <section class="contact" id="kontak">
-    <h2>Hubungi Kami</h2>
-    <p>WhatsApp: <strong>0812-3456-7890</strong></p>
-    <p>Kami siap membantu kebutuhan jasa Anda kapan saja!</p>
-  </section>
+</div>
 
-  <footer>
-    <p>&copy; 2025 Toko Jasa Online. All Rights Reserved.</p>
-  </footer>
+<!-- RUMAH TANGGA -->
+<div class="section-title">Kategori: Pekerjaan Rumah Tangga (Offline)</div>
+<div class="card-container">
 
-  <a class="wa-btn" 
-     href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20bertanya%20tentang%20layanan%20Anda"
-     target="_blank">💬</a>
+  <div class="card">
+    <div class="card-icon">🧹</div>
+    <h3>Bersih-Bersih Ringan</h3>
+    <p>Cepat, fokus area tertentu, cocok untuk kebutuhan mendadak.</p>
+    <div class="price">Mulai Rp 15.000</div>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">🍽️</div>
+    <h3>Cuci Peralatan Ringan</h3>
+    <p>Cuci piring, alat dapur ringan, atau barang rumah kecil.</p>
+    <div class="price">Mulai Rp 10.000</div>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">🛒</div>
+    <h3>Bantu Belanja</h3>
+    <p>Belanja kebutuhan rumah sesuai daftar yang diberikan.</p>
+    <div class="price">Mulai Rp 5.000</div>
+  </div>
+
+</div>
+
+<!-- PEKERJAAN BEBAS -->
+<div class="section-title">Kategori: Pekerjaan Bebas</div>
+<div class="card-container">
+
+  <div class="card">
+    <div class="card-icon">📦</div>
+    <h3>Antar Barang</h3>
+    <p>Pengantaran barang jarak dekat dengan aman.</p>
+    <div class="price">Mulai Rp 10.000</div>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">🛠️</div>
+    <h3>Helper Acak</h3>
+    <p>Bantu angkat barang, pasang barang, atau tugas kecil lain.</p>
+    <div class="price">Mulai Rp 10.000</div>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">⚡</div>
+    <h3>Micro Task Lainnya</h3>
+    <p>Pekerjaan bebas sesuai kebutuhan. Bisa dibicarakan dulu.</p>
+    <div class="price">Flexible</div>
+  </div>
+
+</div>
+
+<!-- WHATSAPP BUTTON -->
+<a class="wa-button" href="https://wa.me/6285727754442" target="_blank">💬</a>
+
+<script>
+  document.getElementById("darkToggle").onclick = () => {
+    document.body.classList.toggle("dark");
+  };
+</script>
 
 </body>
 </html>
