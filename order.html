@@ -6,84 +6,96 @@
 <title>Pemesanan | Minijob Service</title>
 
 <style>
-body { font-family: Arial; background: #f3f4fa; margin:0; padding:20px; }
-h2 { text-align:center; margin-bottom:20px; }
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f4fa;
+  margin: 0;
+  padding: 20px;
+}
 form {
-  max-width:500px; margin:auto; background:white;
-  padding:25px; border-radius:14px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
-label { font-weight:600; display:block; margin-top:15px; }
-input, textarea { width:100%; padding:10px; border:1px solid #ccc; border-radius:8px; margin-top:5px; font-size:15px; }
+label { font-weight: 600; display: block; margin-top: 15px; }
+input, textarea, select {
+  width: 100%; padding: 10px;
+  border: 1px solid #ccc; border-radius: 8px;
+  margin-top: 5px; font-size: 15px;
+}
 button {
-  width:100%; margin-top:20px; padding:12px;
+  width: 100%; margin-top: 20px; padding: 12px;
   background: linear-gradient(90deg,#4b6cff,#8a2be2);
-  color:white; border:none; border-radius:8px; font-size:16px; cursor:pointer;
+  color: white; border: none; border-radius: 8px;
+  font-size: 16px; cursor: pointer;
 }
-button:hover { opacity:0.9; }
-.success { text-align:center; color:green; font-weight:700; margin-top:10px; }
+.success {
+  text-align: center;
+  color: green;
+  font-weight: 700;
+  margin-top: 10px;
+}
 </style>
 </head>
 
 <body>
 
-<h2>Form Pemesanan — Minijob Service</h2>
+<h2 style="text-align:center">Form Pemesanan — Minijob Service</h2>
 
 <form id="orderForm">
+
+  <!-- Timestamp otomatis -->
+  <input type="hidden" name="timestamp" id="timestamp">
+
   <label>Nama Lengkap</label>
   <input type="text" name="nama" required>
 
-  <label>Alamat Lengkap</label>
-  <textarea name="alamat" rows="3" required></textarea>
+  <label>Nomor WhatsApp</label>
+  <input type="text" name="wa" required>
 
   <label>Layanan</label>
   <input type="text" name="layanan" id="layanan" readonly>
 
+  <label>Add-On (opsional)</label>
+  <input type="text" name="addon" placeholder="Misal: Extra service / material">
+
   <label>Harga</label>
   <input type="text" name="harga" id="harga" readonly>
+
+  <label>Catatan / Instruksi Tambahan</label>
+  <textarea name="catatan" rows="3" placeholder="Contoh: Waktu khusus, lokasi, dll."></textarea>
 
   <button type="submit">Kirim Pesanan</button>
   <div id="msg" class="success"></div>
 </form>
 
 <script>
-// Ambil layanan & harga dari query string
+/* ====== Ambil layanan dari query URL ====== */
 const url = new URLSearchParams(window.location.search);
 document.getElementById("layanan").value = url.get("service") || "";
 document.getElementById("harga").value = "Rp " + (url.get("price") || "");
 
-// Google Apps Script URL & Nomor WhatsApp
+/* ====== Tambahkan timestamp ====== */
+document.getElementById("timestamp").value = new Date().toISOString();
+
+/* ====== Submit ke Google Apps Script ====== */
 const scriptURL = "https://script.google.com/macros/s/AKfycbyduAnCEPhZSGWoWUeiTinUfSJ1zVonSiE7XHspT6SqjdHESLChl2gQhp3RJY_JKS5xYg/exec";
-const waNumber = "6285727754442"; // format internasional
 
 document.getElementById("orderForm").addEventListener("submit", function(e){
   e.preventDefault();
 
-  const formData = new FormData(this);
-  const nama = formData.get("nama");
-  const alamat = formData.get("alamat");
-  const layanan = formData.get("layanan");
-  const harga = formData.get("harga");
-
-  // Kirim ke Google Sheet
-  fetch(scriptURL, { method:"POST", body: formData })
-    .then(r => r.json())
-    .then(data => {
-      if(data.status==="success"){
-        document.getElementById("msg").innerText = "Pesanan berhasil dikirim ke Sheet!";
-
-        // Buka WhatsApp
-        const pesan = `Halo, saya ingin memesan layanan:\n\nNama: ${nama}\nAlamat: ${alamat}\nLayanan: ${layanan}\nHarga: ${harga}`;
-        const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(pesan)}`;
-        window.open(waUrl,"_blank");
-
-        // Kembali ke index setelah 2 detik
-        setTimeout(()=> window.location.href="index.html", 2000);
-      } else {
-        alert("Gagal mengirim ke Sheet!");
-      }
-    })
-    .catch(err => alert("Gagal mengirim! Pastikan Apps Script sudah di-deploy publik."));
+  fetch(scriptURL, {
+    method:"POST",
+    body: new FormData(this)
+  })
+  .then(r => {
+    document.getElementById("msg").innerText = "Pesanan berhasil dikirim!";
+    setTimeout(()=> window.location.href="index.html", 2000);
+  })
+  .catch(err => alert("Gagal mengirim!"));
 });
 </script>
 
