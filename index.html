@@ -2,56 +2,503 @@
 <html lang="id">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Layanan Mini Job - Index</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Layanan Mini Job — Modern</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-body{font-family:Arial, sans-serif;margin:0;background:#f5f7ff;color:#111}
-header{background:linear-gradient(135deg,#4b6cff,#8a2be2);padding:40px;text-align:center;color:white}
-.container{max-width:1100px;margin:20px auto;padding:0 16px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-.card{background:white;border-radius:12px;padding:16px;box-shadow:0 8px 30px rgba(20,30,70,0.06)}
-.card h3{margin:6px 0;color:#2b4cff}
-.card p{margin:6px 0;color:#555}
-.card .price{font-weight:700;color:#4b6cff;margin-top:8px}
-.card a{display:inline-block;margin-top:10px;padding:8px 12px;background:linear-gradient(90deg,#4b6cff,#8a2be2);color:white;border-radius:8px;text-decoration:none}
-.footer{padding:24px;text-align:center;color:#777}
+  :root{
+    --bg: #f6f8ff;
+    --card: #ffffff;
+    --muted: #61677c;
+    --accent1: #4b6cff;
+    --accent2: #8a2be2;
+    --glass: rgba(255,255,255,0.6);
+    --radius: 12px;
+  }
+  .dark {
+    --bg: #0f1220;
+    --card: #13141a;
+    --muted: #9aa0b3;
+    --glass: rgba(255,255,255,0.03);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background:var(--bg);
+    color: #0b1020;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    transition:background .28s ease, color .28s ease;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg,var(--accent1),var(--accent2));
+    padding:34px 20px;
+    color:white;
+    border-bottom-left-radius:22px;
+    border-bottom-right-radius:22px;
+    box-shadow: 0 10px 30px rgba(75,108,255,0.12);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  header .title {
+    display:flex;
+    flex-direction:column;
+  }
+  header h1{margin:0;font-size:20px;font-weight:700;letter-spacing:0.2px}
+  header p{margin:6px 0 0;font-size:13px;opacity:0.9}
+
+  .header-actions{display:flex;gap:8px;align-items:center}
+  .btn {
+    background: rgba(255,255,255,0.14);
+    color:white;
+    border: none;
+    padding:8px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    font-size:13px;
+    backdrop-filter: blur(6px);
+  }
+  .btn:active{transform:scale(.98)}
+
+  /* Top controls */
+  .topbar {
+    max-width:1100px;
+    margin:20px auto;
+    display:flex;
+    gap:12px;
+    padding:0 16px;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+  .search {
+    flex:1;
+    min-width:200px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+    background:var(--card);
+    padding:8px;
+    border-radius:12px;
+    box-shadow: 0 6px 18px rgba(15,20,40,0.03);
+  }
+  .search input{
+    border:0;outline:0;width:100%;font-size:14px;padding:8px;background:transparent;
+  }
+  .select, .toggle {
+    min-width:150px;
+  }
+  select {
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid rgba(15,20,40,0.06);
+    background:var(--card);
+    font-size:14px;
+  }
+
+  /* Grid compact cards */
+  .container { max-width:1100px; margin:0 auto; padding:0 16px 40px; }
+  .grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:14px;
+    margin-top:14px;
+  }
+  .card {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px;
+    border-radius:12px;
+    background:var(--card);
+    box-shadow:0 6px 20px rgba(12,18,40,0.04);
+    transition: transform .18s ease, box-shadow .18s ease;
+    cursor:pointer;
+  }
+  .card:hover{ transform: translateY(-6px); box-shadow:0 14px 40px rgba(12,18,40,0.08); }
+
+  .ci {
+    width:56px;height:56px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;
+    background: linear-gradient(180deg, rgba(75,108,255,0.12), rgba(138,43,226,0.05));
+    color:var(--accent2);
+    flex-shrink:0;
+  }
+  .meta { flex:1; min-width:0; }
+  .meta h3 { margin:0; font-size:15px; font-weight:600; color: #10204a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .meta p { margin:6px 0 0; color:var(--muted); font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .price { font-weight:700; color:var(--accent1); font-size:14px; margin-left:8px; flex-shrink:0; }
+
+  /* Order sheet (single-page) */
+  .panel {
+    position:fixed;
+    right:20px; bottom:20px;
+    width: 380px;
+    max-width:calc(100% - 40px);
+    background:var(--card);
+    border-radius:14px;
+    box-shadow:0 20px 60px rgba(12,18,40,0.12);
+    padding:14px;
+    transform: translateY(30px) scale(.98);
+    opacity:0;
+    transition: transform .26s cubic-bezier(.2,.9,.3,1), opacity .22s ease;
+    z-index:60;
+  }
+  .panel.open { transform:none; opacity:1; }
+  .panel h2{ margin:0 0 8px; font-size:16px; }
+  form label{ display:block; font-size:13px; color:var(--muted); margin-top:10px; margin-bottom:6px;}
+  form input[type="text"], form input[type="tel"], form textarea, form select{
+    width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(12,18,40,0.06);
+    font-size:14px; resize:vertical; background:transparent;
+  }
+  .row { display:flex; gap:8px; }
+  .row .half { flex:1; }
+
+  .addon-list { display:flex;flex-direction:column; gap:8px; margin-top:6px;}
+  .addon {
+    display:flex;justify-content:space-between;align-items:center;padding:8px;border-radius:8px;
+    background:linear-gradient(180deg,rgba(0,0,0,0.02),transparent);
+  }
+  .addon input[type="checkbox"]{margin-right:8px;}
+  .total {
+    margin-top:12px; font-weight:700; font-size:16px; color:var(--accent1);
+  }
+
+  .actions { display:flex; gap:8px; margin-top:12px; }
+  .primary {
+    flex:1; background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:white; border:none; padding:10px; border-radius:10px; font-weight:700; cursor:pointer;
+  }
+  .secondary { flex:1; background:transparent; border:1px solid rgba(12,18,40,0.06); padding:10px; border-radius:10px; cursor:pointer; }
+
+  /* Footer */
+  footer { text-align:center; color:var(--muted); padding:28px 16px 60px; }
+
+  /* Dark adjustments */
+  .dark header { box-shadow: none; }
+  .dark body, .dark { color:#e6eaf2; }
+  .dark .card { background:#0f1420; box-shadow:0 8px 28px rgba(0,0,0,0.4); }
+  .dark .ci { background: linear-gradient(180deg, rgba(75,108,255,0.06), rgba(138,43,226,0.03)); color: #cfc9ff; }
+  .dark .panel { background:#0c0e14; color:#e6eaf2; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+  .dark input, .dark textarea, .dark select { background:#0b0b10; border-color: rgba(255,255,255,0.06); color:#e6eaf2; }
+  .dark .price { color:#9fb3ff; }
+
+  @media (max-width:880px){
+    header { padding:24px 16px; flex-direction:column; align-items:flex-start; gap:10px; }
+    .panel { position:fixed; left:50%; transform:translate(-50%,30px) scale(.98); width:92%; bottom:18px; }
+  }
 </style>
 </head>
 <body>
-<header><h1>Layanan Mini Job</h1><p>klik "Pesan" untuk membuka halaman pemesanan masing-masing layanan</p></header>
-<div class="container">
-<div class="card"><h3>Desain Grafis</h3><p>Desain Grafis — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/desain-grafis.html">Pesan</a></div>
-<div class="card"><h3>Edit Foto & Video</h3><p>Edit Foto & Video — layanan profesional.</p><div class="price">Mulai Rp 20.000</div><a href="orders/edit-foto-video.html">Pesan</a></div>
-<div class="card"><h3>Dokumen & Ketik</h3><p>Dokumen & Ketik — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/dokumen-ketik.html">Pesan</a></div>
-<div class="card"><h3>Copywriting / Caption</h3><p>Copywriting / Caption — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/copywriting-caption.html">Pesan</a></div>
-<div class="card"><h3>Edit CV / Resume</h3><p>Edit CV / Resume — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/edit-cv-resume.html">Pesan</a></div>
-<div class="card"><h3>Pembuatan PPT</h3><p>Pembuatan PPT — layanan profesional.</p><div class="price">Mulai Rp 20.000</div><a href="orders/pembuatan-ppt.html">Pesan</a></div>
-<div class="card"><h3>Input Data</h3><p>Input Data — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/input-data.html">Pesan</a></div>
-<div class="card"><h3>Remove Background</h3><p>Remove Background — layanan profesional.</p><div class="price">Mulai Rp 3.000</div><a href="orders/remove-background.html">Pesan</a></div>
-<div class="card"><h3>Bersih-Bersih Ringan</h3><p>Bersih-Bersih Ringan — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/bersih-ringan.html">Pesan</a></div>
-<div class="card"><h3>Cuci Peralatan Ringan</h3><p>Cuci Peralatan Ringan — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/cuci-peralatan.html">Pesan</a></div>
-<div class="card"><h3>Bantu Belanja</h3><p>Bantu Belanja — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/bantu-belanja.html">Pesan</a></div>
-<div class="card"><h3>Cuci Kamar Mandi Ringan</h3><p>Cuci Kamar Mandi Ringan — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/cuci-kamar-mandi.html">Pesan</a></div>
-<div class="card"><h3>Poles Perabot</h3><p>Poles Perabot — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/poles-perabot.html">Pesan</a></div>
-<div class="card"><h3>Lipat Baju</h3><p>Lipat Baju — layanan profesional.</p><div class="price">Mulai Rp 7.000</div><a href="orders/lipat-baju.html">Pesan</a></div>
-<div class="card"><h3>Buang Sampah</h3><p>Buang Sampah — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/buang-sampah.html">Pesan</a></div>
-<div class="card"><h3>Packing Barang</h3><p>Packing Barang — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/packing-barang.html">Pesan</a></div>
-<div class="card"><h3>Foto Produk Basic</h3><p>Foto Produk Basic — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/foto-produk-basic.html">Pesan</a></div>
-<div class="card"><h3>Titip Pesan Makanan</h3><p>Titip Pesan Makanan — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/titip-pesan-makanan.html">Pesan</a></div>
-<div class="card"><h3>Pasang Lampu / Bohlam</h3><p>Pasang Lampu / Bohlam — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/pasang-lampu.html">Pesan</a></div>
-<div class="card"><h3>Helper Angkat Barang</h3><p>Helper Angkat Barang — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/helper-angkat-barang.html">Pesan</a></div>
-<div class="card"><h3>Antar Dokumen</h3><p>Antar Dokumen — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/antar-dokumen.html">Pesan</a></div>
-<div class="card"><h3>Servis Motor (Roda 2)</h3><p>Servis Motor (Roda 2) — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/servis-motor.html">Pesan</a></div>
-<div class="card"><h3>Servis Roda 3</h3><p>Servis Roda 3 — layanan profesional.</p><div class="price">Mulai Rp 20.000</div><a href="orders/servis-roda3.html">Pesan</a></div>
-<div class="card"><h3>Pompa Ban</h3><p>Pompa Ban — layanan profesional.</p><div class="price">Mulai Rp 5.000</div><a href="orders/pompa-ban.html">Pesan</a></div>
-<div class="card"><h3>Cek Aki Motor</h3><p>Cek Aki Motor — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/cek-aki.html">Pesan</a></div>
-<div class="card"><h3>Servis Elektronik Rumah</h3><p>Servis Elektronik Rumah — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/servis-elektronik-rumah.html">Pesan</a></div>
-<div class="card"><h3>Servis Setrika</h3><p>Servis Setrika — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/servis-setrika.html">Pesan</a></div>
-<div class="card"><h3>Servis Speaker</h3><p>Servis Speaker — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/servis-speaker.html">Pesan</a></div>
-<div class="card"><h3>Servis Mini Fan</h3><p>Servis Mini Fan — layanan profesional.</p><div class="price">Mulai Rp 10.000</div><a href="orders/servis-mini-fan.html">Pesan</a></div>
-<div class="card"><h3>Servis Handphone</h3><p>Servis Handphone — layanan profesional.</p><div class="price">Mulai Rp 15.000</div><a href="orders/servis-handphone.html">Pesan</a></div>
 
+<header>
+  <div class="title">
+    <h1>Layanan Mini Job</h1>
+    <p>Praktis — Pilih layanan, isi form, dan pesan</p>
+  </div>
+
+  <div class="header-actions">
+    <button id="openOrders" class="btn" title="Lihat Pesanan">Pesanan</button>
+    <button id="themeBtn" class="btn" aria-pressed="false" title="Mode gelap">🌙</button>
+  </div>
+</header>
+
+<div class="topbar">
+  <div class="search" role="search" aria-label="Cari layanan">
+    <svg width="18" height="18" viewBox="0 0 24 24" style="opacity:.6"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zM10 15a5 5 0 110-10 5 5 0 010 10z"/></svg>
+    <input id="q" placeholder="Cari layanan, contoh: cuci, desain, edit..." />
+    <button class="btn" id="clearSearch" title="Bersihkan" style="background:transparent;color:var(--card);font-weight:600">✕</button>
+  </div>
+
+  <div class="select">
+    <select id="category">
+      <option value="all">Semua Kategori</option>
+      <option value="digital">Digital</option>
+      <option value="rumahan">Rumahan</option>
+      <option value="otomotif">Otomotif</option>
+      <option value="lainnya">Lainnya</option>
+    </select>
+  </div>
 </div>
-<div class="footer">© 2025 Layanan Mini Job</div>
+
+<div class="container">
+  <div class="grid" id="grid">
+    <!-- Cards: compact style (icon left, price right) -->
+    <!-- You can add/duplicate cards following same structure -->
+    <div class="card" data-name="Desain Grafis" data-price="10000" data-cat="digital" tabindex="0">
+      <div class="ci">🎨</div>
+      <div class="meta">
+        <h3>Desain Grafis</h3>
+        <p>Logo, poster, banner</p>
+      </div>
+      <div class="price">Rp 10.000</div>
+    </div>
+
+    <div class="card" data-name="Edit Foto & Video" data-price="20000" data-cat="digital" tabindex="0">
+      <div class="ci">🎬</div>
+      <div class="meta">
+        <h3>Edit Foto & Video</h3>
+        <p>Crop, color grading, montage</p>
+      </div>
+      <div class="price">Rp 20.000</div>
+    </div>
+
+    <div class="card" data-name="Dokumen & Ketik" data-price="5000" data-cat="digital" tabindex="0">
+      <div class="ci">📄</div>
+      <div class="meta">
+        <h3>Dokumen & Ketik</h3>
+        <p>Pengetikan & format dokumen</p>
+      </div>
+      <div class="price">Rp 5.000</div>
+    </div>
+
+    <div class="card" data-name="Bantu Belanja" data-price="5000" data-cat="rumahan" tabindex="0">
+      <div class="ci">🛒</div>
+      <div class="meta">
+        <h3>Bantu Belanja</h3>
+        <p>Belanja kebutuhan harian</p>
+      </div>
+      <div class="price">Rp 5.000</div>
+    </div>
+
+    <div class="card" data-name="Cuci Motor" data-price="15000" data-cat="otomotif" tabindex="0">
+      <div class="ci">🧽</div>
+      <div class="meta">
+        <h3>Cuci Motor</h3>
+        <p>Cuci & detailing basic</p>
+      </div>
+      <div class="price">Rp 15.000</div>
+    </div>
+
+    <div class="card" data-name="Pompa Ban" data-price="5000" data-cat="otomotif" tabindex="0">
+      <div class="ci">💨</div>
+      <div class="meta">
+        <h3>Pompa Ban</h3>
+        <p>Pengisian tekanan ban</p>
+      </div>
+      <div class="price">Rp 5.000</div>
+    </div>
+
+    <!-- add more cards as needed -->
+  </div>
+</div>
+
+<!-- Order panel (single-page) -->
+<div class="panel" id="orderPanel" aria-hidden="true">
+  <h2 id="panelTitle">Form Pemesanan</h2>
+
+  <form id="orderForm" autocomplete="off">
+    <label for="svc">Layanan</label>
+    <input id="svc" name="layanan" type="text" readonly aria-readonly="true" />
+
+    <label for="price">Harga</label>
+    <input id="price" name="harga" type="text" readonly />
+
+    <label for="nama">Nama Lengkap</label>
+    <input id="nama" name="nama" type="text" required />
+
+    <label for="wa">Nomor WhatsApp</label>
+    <input id="wa" name="wa" type="tel" placeholder="08xxxxxxxxxx" required />
+
+    <label for="alamat">Alamat</label>
+    <textarea id="alamat" name="alamat" rows="3" required></textarea>
+
+    <label>Add-ons (opsional)</label>
+    <div class="addon-list" id="addons">
+      <label class="addon"><span>Express (+Rp 5.000)</span><input type="checkbox" data-price="5000" value="Express"></label>
+      <label class="addon"><span>Premium (+Rp 10.000)</span><input type="checkbox" data-price="10000" value="Premium"></label>
+    </div>
+
+    <div class="total" id="totalLabel">Total: Rp 0</div>
+
+    <div class="actions">
+      <button type="submit" class="primary">Kirim & Simpan</button>
+      <button type="button" class="secondary" id="openWhatsapp">Buka WA</button>
+    </div>
+  </form>
+</div>
+
+<footer>
+  © 2025 Layanan Mini Job — dibuat rapi
+</footer>
+
+<script>
+/* ----------------------- Config ----------------------- */
+// Masukkan URL Web App Apps Script kamu di bawah (sudah diisi)
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyHqVm88VgrRqMLKSQRFqb6CGc9fWkcMccn96Ho-_GZXPiHxEdLsfO3qdWkZfO6QrTq6g/exec";
+// Default country code untuk WA link (ubah sesuai kebutuhan)
+const WA_PREFIX = "62"; // tanpa leading 0 (62 untuk Indonesia)
+
+/* ----------------------- Theme ----------------------- */
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+  document.documentElement.classList.toggle('dark');
+  const pressed = themeBtn.getAttribute('aria-pressed') === 'true';
+  themeBtn.setAttribute('aria-pressed', String(!pressed));
+});
+
+/* ----------------------- Search & Filter ----------------------- */
+const q = document.getElementById('q');
+const category = document.getElementById('category');
+const grid = document.getElementById('grid');
+const cards = Array.from(document.querySelectorAll('.card'));
+const clearSearch = document.getElementById('clearSearch');
+
+function renderFilter() {
+  const term = q.value.trim().toLowerCase();
+  const cat = category.value;
+  cards.forEach(c => {
+    const name = c.dataset.name.toLowerCase();
+    const catc = c.dataset.cat || 'lainnya';
+    const match = name.includes(term) && (cat === 'all' || cat === catc);
+    c.style.display = match ? 'flex' : 'none';
+  });
+}
+q.addEventListener('input', renderFilter);
+category.addEventListener('change', renderFilter);
+clearSearch.addEventListener('click', ()=>{ q.value=''; renderFilter(); });
+
+/* ----------------------- Open Order Panel ----------------------- */
+const orderPanel = document.getElementById('orderPanel');
+const svcEl = document.getElementById('svc');
+const priceEl = document.getElementById('price');
+const totalLabel = document.getElementById('totalLabel');
+const addonInputs = Array.from(document.querySelectorAll('#addons input[type="checkbox"]'));
+
+function formatRp(n){
+  n = Number(n)||0;
+  return 'Rp ' + n.toLocaleString('id-ID');
+}
+
+function parseNumberFromPriceText(txt){
+  if(!txt) return 0;
+  return Number(String(txt).replace(/[^\d]/g,''))||0;
+}
+
+function openPanelForCard(card){
+  const name = card.dataset.name || '';
+  const price = Number(card.dataset.price || 0);
+
+  svcEl.value = name;
+  priceEl.value = formatRp(price);
+  computeTotal(); // reset addons
+  orderPanel.classList.add('open');
+  orderPanel.setAttribute('aria-hidden','false');
+  document.getElementById('nama').focus();
+}
+
+/* attach click to cards (keyboard accessible too) */
+cards.forEach(c => {
+  c.addEventListener('click', ()=> openPanelForCard(c));
+  c.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') openPanelForCard(c); });
+});
+
+/* close panel helper (click outside to close) */
+document.addEventListener('click', (e)=>{
+  if(orderPanel.classList.contains('open')) {
+    const inside = orderPanel.contains(e.target) || e.target.closest('.card');
+    if(!inside && window.innerWidth > 880){
+      orderPanel.classList.remove('open');
+      orderPanel.setAttribute('aria-hidden','true');
+    }
+  }
+});
+
+/* Back / close button not needed because panel floats; but ESC closes */
+document.addEventListener('keydown', e => { if(e.key === 'Escape') { orderPanel.classList.remove('open'); orderPanel.setAttribute('aria-hidden','true'); } });
+
+/* ----------------------- Add-ons & total ----------------------- */
+function computeTotal(){
+  const base = parseNumberFromPriceText(priceEl.value);
+  let addonSum = 0;
+  addonInputs.forEach(cb => { if(cb.checked) addonSum += Number(cb.dataset.price||0); });
+  const total = base + addonSum;
+  totalLabel.textContent = "Total: " + formatRp(total);
+  return total;
+}
+addonInputs.forEach(cb => cb.addEventListener('change', computeTotal));
+
+/* ----------------------- Submit -> Google Script ----------------------- */
+const form = document.getElementById('orderForm');
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  const data = {
+    nama: form.nama.value.trim(),
+    alamat: form.alamat.value.trim(),
+    wa: form.wa.value.trim(),
+    layanan: svcEl.value,
+    addons: addonInputs.filter(i=>i.checked).map(i=>i.value).join(', ') || 'Tidak ada',
+    biaya: computeTotal()
+  };
+
+  // simple validation
+  if(!data.nama || !data.wa || !data.alamat){
+    alert('Isi semua field yang wajib.');
+    return;
+  }
+
+  // prepare FormData compatible with script
+  const fd = new FormData();
+  for(const k in data) fd.append(k, data[k]);
+
+  fetch(SCRIPT_URL, { method:'POST', body: fd })
+    .then(res => res.text())
+    .then(_ => {
+      alert('Pesanan berhasil disimpan. Terima kasih!');
+      // show whatsapp quick-send option by enabling button
+      openWhatsappButton(data);
+      form.reset();
+      addonInputs.forEach(cb=>cb.checked=false);
+      computeTotal();
+      orderPanel.classList.remove('open');
+      orderPanel.setAttribute('aria-hidden','true');
+    })
+    .catch(err => {
+      console.error(err);
+      alert('Gagal mengirim. Periksa koneksi atau konfigurasi Web App.');
+    });
+});
+
+/* ----------------------- WhatsApp quick open ----------------------- */
+const openWhatsappBtn = document.getElementById('openWhatsapp');
+function openWhatsappButton(lastData){
+  // attach handler to open WhatsApp with message (internationalized WA_PREFIX)
+  openWhatsappBtn.onclick = () => {
+    const wa = (lastData && lastData.wa) ? lastData.wa.replace(/^0+/, WA_PREFIX) : '';
+    // ensure bang 62 prefix if user used 08xxxx
+    let phone = lastData.wa.trim();
+    if(phone.startsWith('0')) phone = WA_PREFIX + phone.slice(1);
+    if(phone.startsWith('+')) phone = phone.replace('+','');
+    const msg = [
+      `Pesan Layanan: ${lastData.layanan}`,
+      `Nama: ${lastData.nama}`,
+      `Alamat: ${lastData.alamat}`,
+      `Add-ons: ${lastData.addons}`,
+      `Total: ${formatRp(lastData.biaya)}`
+    ].join('%0A');
+    // wa link uses phone number of your merchant; by default open chat to user's own number,
+    // better to open generic wa.me without number (user can choose)
+    // If you want messages to go to your number, replace '' with '62xxxxxxxxxx'
+    const merchant = ''; // <-- jika mau pesan langsung ke nomor kamu, isi '62...'
+    const waUrl = merchant ? `https://wa.me/${merchant}?text=${msg}` : `https://wa.me/?text=${msg}`;
+    window.open(waUrl, '_blank');
+  };
+  // notify user that WA ready
+  openWhatsappBtn.classList.add('ready');
+}
+
+/* ----------------------- Initial compute ----------------------- */
+computeTotal();
+renderFilter();
+</script>
 </body>
-</html>
+                                 </html>
