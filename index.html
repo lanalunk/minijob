@@ -42,7 +42,6 @@ header {
   color: #333;
 }
 
-/* Dark mode title */
 body.dark .section-title { color: #ddd; }
 
 .search-box {
@@ -61,7 +60,6 @@ body.dark .section-title { color: #ddd; }
   transition: 0.3s;
 }
 
-/* Dark mode search */
 body.dark .search-box input {
   background: #222;
   border-color: #555;
@@ -72,6 +70,7 @@ body.dark .search-box input {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
   gap: 16px;
+  margin-bottom: 30px;
 }
 
 .card {
@@ -84,7 +83,6 @@ body.dark .search-box input {
   transform: translateY(0);
 }
 
-/* Dark mode card */
 body.dark .card {
   background: #1a1c22;
   box-shadow: 0 8px 25px rgba(255,255,255,0.05);
@@ -106,9 +104,7 @@ body.dark .card {
   color: #2b4cff;
 }
 
-body.dark .card h3 {
-  color: #82a2ff;
-}
+body.dark .card h3 { color: #82a2ff; }
 
 .card .price {
   color: #4b6cff;
@@ -116,7 +112,6 @@ body.dark .card h3 {
   margin-top: 6px;
 }
 
-/* dark price */
 body.dark .price { color: #8c9dff; }
 
 #darkToggle {
@@ -143,6 +138,16 @@ body.dark #darkToggle {
 }
 
 body.dark .footer { color: #aaa; }
+.sub-category {
+  margin-top: 20px;
+}
+.sub-category h4 {
+  font-size: 18px;
+  color: #444;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+body.dark .sub-category h4 { color: #ccc; }
 </style>
 </head>
 
@@ -167,7 +172,24 @@ body.dark .footer { color: #aaa; }
 
   <!-- ================== KATEGORI 2 ================== -->
   <div class="section-title">🔧 Skill Offline / Servis / Kursus / Bengkel</div>
-  <div class="grid" id="cat2"></div>
+
+  <!-- Sub-kategori Servis / Perbaikan -->
+  <div class="sub-category">
+    <h4>🛠️ Servis / Perbaikan</h4>
+    <div class="grid" id="cat2_service"></div>
+  </div>
+
+  <!-- Sub-kategori Kursus / Workshop -->
+  <div class="sub-category">
+    <h4>📚 Kursus / Workshop</h4>
+    <div class="grid" id="cat2_course"></div>
+  </div>
+
+  <!-- Sub-kategori Jasa Freelance / Helper -->
+  <div class="sub-category">
+    <h4>🎉 Jasa Freelance / Helper</h4>
+    <div class="grid" id="cat2_helper"></div>
+  </div>
 
   <!-- ================== KATEGORI 3 ================== -->
   <div class="section-title">🏡 Pekerjaan Rumah Tangga / Helper Non Skill</div>
@@ -192,7 +214,7 @@ const data = {
     {icon:"✂️", name:"Remove Background", price:"3000"}
   ],
 
-  cat2: [
+  cat2_service: [
     {icon:"🔧", name:"Servis Motor (Roda 2)", price:"15000"},
     {icon:"🛞", name:"Servis Roda 3", price:"20000"},
     {icon:"🔋", name:"Cek Aki Motor", price:"10000"},
@@ -202,6 +224,23 @@ const data = {
     {icon:"🌀", name:"Servis Mini Fan", price:"10000"},
     {icon:"📱", name:"Servis Handphone", price:"15000"},
     {icon:"💡", name:"Pasang Lampu / Bohlam", price:"10000"},
+    {icon:"🛠️", name:"Servis Perabotan Rumah", price:"20000"},
+    {icon:"🚲", name:"Servis Sepeda / Roda Kecil", price:"15000"}
+  ],
+
+  cat2_course: [
+    {icon:"📚", name:"Kursus Komputer", price:"50000"},
+    {icon:"🎸", name:"Kursus Musik / Alat Musik", price:"40000"},
+    {icon:"🖌️", name:"Workshop Kerajinan Tangan", price:"30000"}
+  ],
+
+  cat2_helper: [
+    {icon:"💇", name:"Cukur Rambut / Haircut", price:"25000"},
+    {icon:"⏳", name:"Jasa Menunggu Antrian", price:"10000"},
+    {icon:"👶", name:"Menjaga Anak", price:"30000"},
+    {icon:"🧓", name:"Menjaga Lansia", price:"30000"},
+    {icon:"🐶", name:"Menitipkan Hewan Peliharaan", price:"20000"},
+    {icon:"🎉", name:"Freelance Event", price:"50000"},
     {icon:"🔧", name:"Helper Angkat Barang", price:"10000"}
   ],
 
@@ -218,32 +257,33 @@ const data = {
   ]
 };
 
-
 /* ================== RENDER CARD ================== */
 
+function renderCategory(catId) {
+  const container = document.getElementById(catId);
+  container.innerHTML = "";
+
+  data[catId].forEach(item => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.setAttribute("data-name", item.name.toLowerCase());
+
+    div.innerHTML = `
+      <div class="card-icon">${item.icon}</div>
+      <h3>${item.name}</h3>
+      <div class="price">Mulai Rp ${item.price}</div>
+    `;
+
+    div.onclick = () => {
+      window.location.href = `order.html?service=${encodeURIComponent(item.name)}&price=${item.price}`;
+    };
+
+    container.appendChild(div);
+  });
+}
+
 function render() {
-  for (let cat in data) {
-    const container = document.getElementById(cat);
-    container.innerHTML = "";
-
-    data[cat].forEach(item => {
-      const div = document.createElement("div");
-      div.className = "card";
-      div.setAttribute("data-name", item.name.toLowerCase());
-
-      div.innerHTML = `
-        <div class="card-icon">${item.icon}</div>
-        <h3>${item.name}</h3>
-        <div class="price">Mulai Rp ${item.price}</div>
-      `;
-
-      div.onclick = () => {
-        window.location.href = `order.html?service=${encodeURIComponent(item.name)}&price=${item.price}`;
-      };
-
-      container.appendChild(div);
-    });
-  }
+  ["cat1", "cat2_service", "cat2_course", "cat2_helper", "cat3"].forEach(renderCategory);
 }
 
 render();
