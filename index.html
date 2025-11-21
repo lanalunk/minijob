@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toko Jasa Online Modern</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e88e5, #0d47a1);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 5px;
+    }
+
+    nav {
+      background: #0d47a1;
+      padding: 12px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 18px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.7;
+    }
+
+    .hero {
+      padding: 80px 20px;
+      background: white;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .service-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .contact {
+      padding: 40px 20px;
+      text-align: center;
+      background: #e3f2fd;
+    }
+
+    footer {
+      background: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+
+    .wa-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: 0.3s;
+      z-index: 200;
+    }
+
+    .wa-btn:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .hero h2 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Toko Jasa Online</h1>
+    <p>Layanan cepat, modern, dan terpercaya</p>
+  </header>
+
+  <nav>
+    <a href="#beranda">Beranda</a>
+    <a href="#jasa">Jasa</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+
+  <section class="hero" id="beranda">
+    <h2>Solusi Jasa Terbaik untuk Kebutuhanmu!</h2>
+    <p>Pilih layanan sesuai kebutuhanmu dengan tampilan modern & profesional.</p>
+  </section>
+
+  <section class="services" id="jasa">
+    <div class="service-card">
+      <h3>Desain Grafis</h3>
+      <p>Logo, poster, banner, dan kebutuhan desain lainnya.</p>
+      <strong>Rp 50.000 – 150.000</strong>
+    </div>
+
+    <div class="service-card">
+      <h3>Editing Video</h3>
+      <p>Video pendek, reels, promosi, dan lainnya.</p>
+      <strong>Rp 75.000 – 200.000</strong>
+    </div>
+
+    <div class="service-card">
+      <h3>Jasa Pengetikan</h3>
+      <p>Dokumen, tugas, laporan, dan lainnya.</p>
+      <strong>Rp 5.000 / halaman</strong>
+    </div>
+  </section>
+
+  <section class="contact" id="kontak">
+    <h2>Hubungi Kami</h2>
+    <p>WhatsApp: <strong>0812-3456-7890</strong></p>
+    <p>Kami siap membantu kebutuhan jasa Anda kapan saja!</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Toko Jasa Online. All Rights Reserved.</p>
+  </footer>
+
+  <a class="wa-btn" 
+     href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20bertanya%20tentang%20layanan%20Anda"
+     target="_blank">💬</a>
+
+</body>
+</html>
