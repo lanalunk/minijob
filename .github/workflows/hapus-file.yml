@@ -9,15 +9,19 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+          ref: main
 
       - name: Hapus semua file kecuali index.html
         run: |
-          find . -maxdepth 1 -type f ! -name "index.html" -delete
+          rm -f *.html
+          git restore index.html
 
       - name: Commit perubahan
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add .
-          git commit -m "Hapus semua file kecuali index.html" || echo "Tidak ada file yang dihapus"
-          git push
+          git add -A
+          git commit -m "Hapus semua file kecuali index.html" || echo "Tidak ada perubahan"
+          git push origin main
