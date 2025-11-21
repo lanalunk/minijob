@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pemesanan | Minijob Service</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f4fa;
+  margin: 0;
+  padding: 20px;
+}
+form {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+label { font-weight: 600; display: block; margin-top: 15px; }
+input, textarea {
+  width: 100%; padding: 10px;
+  border: 1px solid #ccc; border-radius: 8px;
+  margin-top: 5px; font-size: 15px;
+}
+button {
+  width: 100%; margin-top: 20px; padding: 12px;
+  background: linear-gradient(90deg,#4b6cff,#8a2be2);
+  color: white; border: none; border-radius: 8px;
+  font-size: 16px; cursor: pointer;
+}
+.success {
+  text-align: center;
+  color: green;
+  font-weight: 700;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2 style="text-align:center">Form Pemesanan — Minijob Service</h2>
+
+<form id="orderForm">
+  
+  <label>Nama Lengkap</label>
+  <input type="text" name="nama" required>
+
+  <label>Alamat Lengkap</label>
+  <textarea name="alamat" rows="3" required></textarea>
+
+  <label>Nomor WhatsApp</label>
+  <input type="text" name="wa" required>
+
+  <label>Layanan</label>
+  <input type="text" name="layanan" id="layanan" readonly>
+
+  <label>Harga</label>
+  <input type="text" name="harga" id="harga" readonly>
+
+  <button type="submit">Kirim Pesanan</button>
+  <div id="msg" class="success"></div>
+</form>
+
+<script>
+/* ====== Ambil layanan dari query URL ====== */
+
+const url = new URLSearchParams(window.location.search);
+document.getElementById("layanan").value = url.get("service") || "";
+document.getElementById("harga").value = "Rp " + (url.get("price") || "");
+
+/* ====== Submit ke Google Apps Script ====== */
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbyHqVm88VgrRqMLKSQRFqb6CGc9fWkcMccn96Ho-_GZXPiHxEdLsfO3qdWkZfO6QrTq6g/exec;
+
+document.getElementById("orderForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  fetch(scriptURL, {
+    method:"POST",
+    body: new FormData(this)
+  })
+  .then(r => {
+    document.getElementById("msg").innerText = "Pesanan berhasil dikirim!";
+    setTimeout(()=> window.location.href="index.html", 2000);
+  })
+  .catch(err => alert("Gagal mengirim!"));
+});
+</script>
+
+</body>
+</html>
