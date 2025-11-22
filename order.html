@@ -60,7 +60,12 @@ button {
   <input type="text" name="layanan" id="layanan" readonly>
 
   <label>Add-On (opsional)</label>
-  <input type="text" name="addon" placeholder="Misal: Extra service / material">
+  <select name="addon" id="addon">
+    <option value="0" data-label="-">-- Pilih Add-On --</option>
+    <option value="10000" data-label="Extra Material">Extra Material (+Rp 10.000)</option>
+    <option value="15000" data-label="Pengiriman Cepat">Pengiriman Cepat (+Rp 15.000)</option>
+    <option value="20000" data-label="Tambahan Jam Layanan">Tambahan Jam Layanan (+Rp 20.000)</option>
+  </select>
 
   <label>Harga</label>
   <input type="text" name="harga" id="harga" readonly>
@@ -75,24 +80,54 @@ button {
 <script>
 /* ====== Ambil layanan dari query URL ====== */
 const url = new URLSearchParams(window.location.search);
+const basePrice = parseInt(url.get("price") || "0");
 document.getElementById("layanan").value = url.get("service") || "";
-document.getElementById("harga").value = "Rp " + (url.get("price") || "");
 
-/* ====== Tambahkan timestamp ====== */
+/* ====== Harga otomatis ====== */
+const hargaInput = document.getElementById("harga");
+function updateHarga() {
+  const addonSelect = document.getElementById("addon");
+  const addonPrice = parseInt(addonSelect.value);
+  hargaInput.value = "Rp " + (basePrice + addonPrice);
+}
+updateHarga();
+document.getElementById("addon").addEventListener("change", updateHarga);
+
+/* ====== Timestamp otomatis ====== */
 document.getElementById("timestamp").value = new Date().toISOString();
 
 /* ====== Submit ke Google Apps Script ====== */
 const scriptURL = "https://script.google.com/macros/s/AKfycbyduAnCEPhZSGWoWUeiTinUfSJ1zVonSiE7XHspT6SqjdHESLChl2gQhp3RJY_JKS5xYg/exec";
+const waNumber = "6285727754442";
 
 document.getElementById("orderForm").addEventListener("submit", function(e){
   e.preventDefault();
+  const formData = new FormData(this);
 
+  // Kirim ke Google Sheet
   fetch(scriptURL, {
-    method:"POST",
-    body: new FormData(this)
+    method: "POST",
+    body: formData
   })
   .then(r => {
     document.getElementById("msg").innerText = "Pesanan berhasil dikirim!";
+
+    const addonLabel = document.querySelector("#addon option:checked").dataset.label || "-";
+    
+    // Format pesan WhatsApp
+    const text = `📌 *Pesanan Baru Minijob Service*%0A` +
+                 `🕒 Timestamp: ${formData.get("timestamp")}%0A` +
+                 `👤 Nama: ${formData.get("nama")}%0A` +
+                 `📱 WA Pemesan: ${formData.get("wa")}%0A` +
+                 `💼 Layanan: ${formData.get("layanan")}%0A` +
+                 `➕ Add-On: ${addonLabel}%0A` +
+                 `💰 Harga: ${formData.get("harga")}%0A` +
+                 `📝 Catatan: ${formData.get("catatan") || "-"}`;
+
+    // Buka WhatsApp
+    window.open(`https://wa.me/${waNumber}?text=${text}`, "_blank");
+
+    // Redirect ke index setelah 2 detik
     setTimeout(()=> window.location.href="index.html", 2000);
   })
   .catch(err => alert("Gagal mengirim!"));
